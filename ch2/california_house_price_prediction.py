@@ -142,7 +142,7 @@ def prepare_data(train_data):
 
     train_set_prepared = full_pipeline.fit_transform(train_set)
 
-    return train_set_prepared, train_set_labels
+    return train_set_prepared, train_set_labels, full_pipeline
 
 
 def ml_algos(train_set_prepared, train_set_labels):
@@ -211,6 +211,7 @@ def ml_algos(train_set_prepared, train_set_labels):
         i += 1
 
     best = final_scores[i]
+    print("\nWinning model was: %s\n" % best[0])
     return best[0]
 
 
@@ -224,14 +225,29 @@ def fine_tune(model, train_set_prepared, train_set_labels):
 
     # Now print the best combination of parameters
     print("Best params found: ", grid_search.best_params_)
-    return grid_search.best_params_
+    return grid_search.best_estimator_
 
+
+def run_final_model(model, test_set, full_pipeline):
+
+    X_test = test_set.drop('median_house_value', axis=1)
+    y_test = test_set['median_house_value'].copy()
+
+    X_test_prepared = full_pipeline.transform(X_test)
+
+    final_predictions = model.predict(X_test_prepared)
+
+    final_mse = mean_squared_error(y_test, final_predictions)
+    final_rmse = np.sqrt(final_mse)
+    print("\nFinal score:             %d\n" % int(final_rmse))
+    
 
 def main():
     train_set, test_set = create_test_set()
-    train_set_prepared, train_set_labels = prepare_data(train_set)
+    train_set_prepared, train_set_labels, full_pipeline = prepare_data(train_set)
     model_type = ml_algos(train_set_prepared, train_set_labels)
-    params = fine_tune(model_type, train_set_prepared, train_set_labels)
+    final_model = fine_tune(model_type, train_set_prepared, train_set_labels)
+    run_final_model(final_model, test_set, full_pipeline)
 
 
 if __name__ == '__main__':
