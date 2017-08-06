@@ -34,6 +34,4 @@ Starting grid search for best hyperparameters...
 Best params found:  {'max_features': 8, 'n_estimators': 70}
 
 Final score:             46856
-
-
 ```bash
