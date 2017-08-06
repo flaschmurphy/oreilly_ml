@@ -1,7 +1,7 @@
-#Sample Output from the standalone py script:
+
+# Sample Output from the standalone py script:
 
 ```bash
-
 Linear Regression RMSE:             69050
 Decision Tree Regression RMSE:      0
 
@@ -34,4 +34,4 @@ Starting grid search for best hyperparameters...
 Best params found:  {'max_features': 8, 'n_estimators': 70}
 
 Final score:             46856
-```bash
+```
