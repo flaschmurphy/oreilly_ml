@@ -15,7 +15,6 @@ from six.moves import urllib
 from sklearn.base import BaseEstimator
 from sklearn.base import TransformerMixin
 
-from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
@@ -30,7 +29,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.pipeline import FeatureUnion
 
 from sklearn.metrics import mean_squared_error
-
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
@@ -49,7 +47,6 @@ class DataFrameSelector(BaseEstimator, TransformerMixin):
         return self
     def transform(self, X):
         return X[self.attribute_names].values
-
 
 
 class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
@@ -93,7 +90,6 @@ def load_housing_data(housing_path=HOUSING_PATH):
 def create_test_set():
     fetch_housing_data()
     housing = load_housing_data()
-    train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
 
     housing["income_cat"] = np.ceil(housing["median_income"] / 1.5)
     housing["income_cat"].where(housing["income_cat"] < 5, 5.0, inplace=True)
