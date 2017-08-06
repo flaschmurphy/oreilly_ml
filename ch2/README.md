@@ -1,7 +1,7 @@
-Sample Output from the standalone py script:
+#Sample Output from the standalone py script:
 
+```bash
 
-(dl) ciaran@ciaran-XPS-13-9360:ch2$ python ./california_house_price_prediction.py 
 Linear Regression RMSE:             69050
 Decision Tree Regression RMSE:      0
 
@@ -35,5 +35,5 @@ Best params found:  {'max_features': 8, 'n_estimators': 70}
 
 Final score:             46856
 
-(dl) ciaran@ciaran-XPS-13-9360:ch2$ 
 
+```bash
